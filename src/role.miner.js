@@ -19,6 +19,10 @@ class RoleMiners extends CreepsBase {
       // sourceId will persist
       // console.log(`${creep} running ${creep.memory.sourceId} ${typeof creep.memory.sourceId}`);
 
+      if (typeof(creep.room.memory.sMiners) == "undefined") {
+        creep.room.memory.sMiners = [];
+      }
+
       if (!creep.memory.sourceId) {
         let room = creep.room,
           list = Object.keys(room.memory.sMiners);
@@ -41,6 +45,13 @@ class RoleMiners extends CreepsBase {
       if (!creep.memory.isReady) {
         let containerPos;
         if (!creep.memory.pos) {
+          if (typeof(creep.memory.sourceId) == "undefined") {
+            creep.memory.sourceId = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+              filter: (x) => {
+                return x.structureType === STRUCTURE_CONTAINER;
+              },
+            }).id;
+          }
           source = Game.getObjectById(creep.memory.sourceId);
           let container = source.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (x) => {
