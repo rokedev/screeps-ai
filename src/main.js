@@ -24,7 +24,7 @@ Cache.addEnergyProperties(Resource.prototype);
 Cache.addEnergyProperties(Source.prototype);
 
 module.exports.loop = function () {
-  let phaseNumber = Phases.getCurrentPhaseNumber(Game.spawns['Spawn1'].room);
+  let phaseNumber = Phases.getCurrentPhaseNumber(Game.spawns['Base1'].room);
 
   initGame(phaseNumber);
   Cache.calculateProjectedEnergy(); // recalculate projected energy at the beginning of each tick.
